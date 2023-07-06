@@ -133,4 +133,34 @@ socket.on('countUpdated', (count) => {
 	    })
 	});
 	
-![image](https://github.com/Anilkashyap96/Socket-Event-Increment-Counter/assets/24756308/e6da4a34-cc77-47dd-b3ae-ef856afe1114)
+
+Event Acknowledge
+Public/Chat.js
+--------------
+document.querySelector('#send-text').addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    const dom = document.querySelector('#message-box');
+    const text = dom.value;
+    // Emit the event and acknowledge the event through callback
+    socket.emit('sendMessage', text, (callbackMessage)=> {
+        console.log(`This message was delivered: ${callbackMessage}`)
+    });
+})
+
+src/index.js
+--------------
+
+io.on('connection',  (socket) => {
+    // Emit the event for other connections except itself connection
+    socket.broadcast.emit('message', 'A new user has joined')
+
+        // Event Handling and Event Acknowledgement using the callback
+    socket.on('sendMessage', (message, callback) => {
+        // Emit the event for all the connections including itself connection
+        socket.broadcast.emit('message', 'BroadCasting: '+message);
+        callback('Delivered');
+    });
+});
+
+![image](https://github.com/Anilkashyap96/Socket-Event-Increment-Counter/assets/24756308/1dbdfdb7-be3d-4219-b12a-3f7f3eac06cb)

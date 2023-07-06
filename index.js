@@ -1,3 +1,4 @@
+// Emit event for particular connection & all the connections including itself
 const path = require('path');
 const http = require('http');
 const express = require('express');

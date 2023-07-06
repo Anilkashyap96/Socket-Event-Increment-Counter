@@ -163,4 +163,26 @@ io.on('connection',  (socket) => {
     });
 });
 
-![image](https://github.com/Anilkashyap96/Socket-Event-Increment-Counter/assets/24756308/1dbdfdb7-be3d-4219-b12a-3f7f3eac06cb)
+
+Join
+---- 
+**Note: socket.emit() to emit a brand new event that the server is going to listen for. And this is going to be called 'join' or something similar. 'join' is going to accept the 'username' you want to use and the 'room' you are  trying to join.
+
+Public/Chat.js
+
+
+**There are three ways to send the event from server to client-**
+	1- **Socket.emit()** : That sends an event to the specific client
+	2- **Io.emit()**: That sends an event to every connected client
+	3- **Socket.broadcast.emit()** : That sends an event to every connected client except for this one
+
+  There are two method in case of emitting the event in the room-
+ 1- **io.to(room).emit()**: It sends the event to the everybody in a specific room. 
+                        It allows to send a message to everyone in a chat room without
+                        sending it to people in other room.
+
+ 2-  **socket.broadcast.to(room).emit()**: It sends an event to everyone except for the specific
+                                       client, but it's limiting it to specific chatroom.   
+
+![image](https://github.com/Anilkashyap96/Socket-Event-Increment-Counter/assets/24756308/a4512355-1f4d-42a5-b342-1af64411003d)
+
